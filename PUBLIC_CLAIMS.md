@@ -12,7 +12,7 @@
 | The original NUM-SYNTH record reports 25 valid solver-result rows. | SUPPORTED_WITH_QUALIFICATION | Historical process record; public script reproduces five cases × two solvers. |
 | An over-relaxed Jacobi control failed 8/8 design cases. | SUPPORTED | Falsification control result. |
 | The method proves AI replaces engineers. | DO_NOT_CLAIM | Out of scope and unsupported. |
-| Three independent implementation structures were evaluated in SYS-PROTOCOL. | SUPPORTED | `experiments/sys-protocol-001/README.md` |
+| Three materially distinct implementation structures were evaluated in SYS-PROTOCOL. | SUPPORTED_WITH_QUALIFICATION | `experiments/sys-protocol-001/README.md`; separation is process-recorded and not cryptographically proven. |
 | Twelve deliberate semantic mutants were generated and all twelve were detected. | SUPPORTED | `experiments/sys-protocol-001/mutation_results.csv` |
 | All three frozen candidates conformed on 25 held-out traces in the self-authored protocol experiment. | SUPPORTED_WITH_QUALIFICATION | `experiments/sys-protocol-001/results/conformance.json`; bounded to this experiment. |
 | Thirty-six of thirty-six frozen requirements had traceability coverage. | SUPPORTED | `experiments/sys-protocol-001/traceability.csv` |
