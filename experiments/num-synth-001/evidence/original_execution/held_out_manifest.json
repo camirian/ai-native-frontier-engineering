@@ -1,0 +1,30 @@
+{
+  "instances": [
+    [
+      32,
+      "contrast",
+      "low"
+    ],
+    [
+      64,
+      "smooth",
+      "mixed"
+    ],
+    [
+      128,
+      "constant",
+      "polyexp"
+    ],
+    [
+      128,
+      "anisotropic",
+      "polyexp"
+    ],
+    [
+      64,
+      "contrast",
+      "mixed"
+    ]
+  ],
+  "sha256": "61cafcd94b9789339cc0ac3e6570887bf300a0a0a63a584ebb47b219d8d98866"
+}

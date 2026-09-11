@@ -1,0 +1,15 @@
+{
+  "MISSION_ID": "MISSION-GEN-DESIGN-001",
+  "EXECUTION_DATE": "2026-09-10",
+  "PROBLEM_SPECIFICATION": "Synthetic normalized planar axial-bar truss with finite-element evaluation.",
+  "DESIGN_SET": "Recorded design loads; original manifest SHA-256 89a5a31f46db5cb0ce03a2d03f40b01bf888825af16219e18b402db0fba611c4.",
+  "HELD_OUT_SET": "Three recorded held-out loads; original manifest SHA-256 1bbf6a9749cf20b685d9267c65b0e9701fd35df5004e3c122b7c5ee6201c657b.",
+  "ORACLE": "Deterministic axial-bar finite-element calculation in the public reproduction script.",
+  "CANDIDATE_GENERATION_BOUNDARY": "The original process records generated candidates, but public package contains only figure-relevant candidate bytes and no independent routing record.",
+  "RESULTS": "Historical results record G06/B2 design-envelope mass comparison and held-out failures; public reproduction rechecks packaged G06/B2 results.",
+  "CLAIM_BOUNDARY": "Synthetic normalized experiment; no robust superiority or real-structure safety claim.",
+  "ORIGINAL_EVIDENCE_FILES": ["evidence/original_execution/design_load_manifest.json", "evidence/original_execution/held_out_load_manifest.json", "evidence/original_execution/finalist_hashes.txt", "evidence/original_execution/held_out_results.csv"],
+  "ORIGINAL_HASHES": {"design_load_manifest.json": "89a5a31f46db5cb0ce03a2d03f40b01bf888825af16219e18b402db0fba611c4", "held_out_load_manifest.json": "1bbf6a9749cf20b685d9267c65b0e9701fd35df5004e3c122b7c5ee6201c657b", "finalist_hashes.txt": "3c24c031b39bc392f9477bc62c2bb35cc5b54137772ef7e528315879bace1768", "held_out_results.csv": "08e8730b0e79bd37f92b33c71e137219e4690023cdfb04a0b1cef7fb2b2013fc"},
+  "REPRODUCED_NOW_FILES": ["reproduced/held_out_reproduction.json"],
+  "WHAT_CANNOT_BE_PROVEN_RETROSPECTIVELY": "Held-out secrecy, independent evaluator separation, candidate-search routing, or cryptographic freeze timing."
+}

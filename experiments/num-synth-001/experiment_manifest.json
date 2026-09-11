@@ -1,0 +1,15 @@
+{
+  "MISSION_ID": "MISSION-NUM-SYNTH-001",
+  "EXECUTION_DATE": "2026-09-10",
+  "PROBLEM_SPECIFICATION": "Synthetic flux-form 2-D elliptic discrete family with manufactured discrete solution.",
+  "DESIGN_SET": "Eight recorded combinations; original manifest SHA-256 cf9d829d7c457d360d5dcad195561d8d959a299369486ba39d41e421c913ac9c.",
+  "HELD_OUT_SET": "Five recorded combinations; original manifest SHA-256 991e88c8a5f9ef62311ba0818814bd4503ccc1d516c0dece3b37965221607ab4.",
+  "ORACLE": "Deterministic manufactured-solution correctness calculation in the public reproduction script.",
+  "CANDIDATE_GENERATION_BOUNDARY": "Historical routing is not reconstructable from the public package.",
+  "RESULTS": "Historical aggregates record validity and exploratory timing observations; public reproduction rechecks numerical validity.",
+  "CLAIM_BOUNDARY": "No robust benchmark or general solver-superiority claim.",
+  "ORIGINAL_EVIDENCE_FILES": ["evidence/original_execution/design_set_manifest.json", "evidence/original_execution/held_out_manifest.json", "evidence/original_execution/held_out_results.csv", "evidence/original_execution/code_hashes.txt"],
+  "ORIGINAL_HASHES": {"design_set_manifest.json": "cf9d829d7c457d360d5dcad195561d8d959a299369486ba39d41e421c913ac9c", "held_out_manifest.json": "991e88c8a5f9ef62311ba0818814bd4503ccc1d516c0dece3b37965221607ab4", "held_out_results.csv": "fa99f36bf46045c6336cea181ba5d098185de205f966f2779dcae0f79d636500"},
+  "REPRODUCED_NOW_FILES": ["reproduced/reproduction.json", "evidence/timing_raw.csv", "evidence/timing_environment.json"],
+  "WHAT_CANNOT_BE_PROVEN_RETROSPECTIVELY": "Held-out secrecy, independent routing, original machine timing conditions, or per-replicate historical timings."
+}

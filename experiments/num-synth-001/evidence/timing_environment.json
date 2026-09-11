@@ -1,0 +1,14 @@
+{
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy_version": "1.26.4",
+  "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+  "architecture": "x86_64",
+  "case": [
+    64,
+    "smooth",
+    "mixed"
+  ],
+  "warmups_per_solver": 1,
+  "repeats_per_solver": 5,
+  "clock": "time.perf_counter_ns"
+}

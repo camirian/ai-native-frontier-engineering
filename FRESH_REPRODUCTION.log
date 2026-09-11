@@ -1,0 +1,199 @@
+./CONTRIBUTING.md: OK
+./FRESH_REPRODUCTION.md: OK
+./LICENSE: OK
+./PROVENANCE.md: OK
+./PUBLIC_CLAIMS.md: OK
+./README.md: OK
+./THIRD_PARTY.md: OK
+./evidence/REPRODUCTION_STATUS.md: OK
+./evidence/RESULTS_LEDGER.md: OK
+./experiments/gen-design-001/README.md: OK
+./experiments/gen-design-001/code/run_experiment.py: OK
+./experiments/gen-design-001/data/B2_warren.json: OK
+./experiments/gen-design-001/data/G06.json: OK
+./experiments/gen-design-001/data/results_summary.json: OK
+./experiments/gen-design-001/evidence/original_execution/design_load_manifest.json: OK
+./experiments/gen-design-001/evidence/original_execution/finalist_hashes.txt: OK
+./experiments/gen-design-001/evidence/original_execution/held_out_load_manifest.json: OK
+./experiments/gen-design-001/evidence/original_execution/held_out_results.csv: OK
+./experiments/gen-design-001/experiment_manifest.json: OK
+./experiments/gen-design-001/reproduced/held_out_reproduction.json: OK
+./experiments/num-synth-001/README.md: OK
+./experiments/num-synth-001/code/measure_timing.py: OK
+./experiments/num-synth-001/code/run_experiment.py: OK
+./experiments/num-synth-001/data/results_summary.json: OK
+./experiments/num-synth-001/evidence/original_execution/code_hashes.txt: OK
+./experiments/num-synth-001/evidence/original_execution/design_set_manifest.json: OK
+./experiments/num-synth-001/evidence/original_execution/held_out_manifest.json: OK
+./experiments/num-synth-001/evidence/original_execution/held_out_results.csv: OK
+./experiments/num-synth-001/evidence/timing_environment.json: OK
+./experiments/num-synth-001/evidence/timing_raw.csv: OK
+./experiments/num-synth-001/experiment_manifest.json: OK
+./experiments/num-synth-001/reproduced/reproduction.json: OK
+./experiments/num-synth-001/timing_methodology.md: OK
+./media/gen-design-mass-and-held-out.svg: OK
+./media/gen-design-stress-utilization.svg: OK
+./media/gen-design-topologies.svg: OK
+./media/num-synth-summary.svg: OK
+./methodology/CLEAN_ROOM_METHOD.md: OK
+./requirements.txt: OK
+./scripts/render_figures.py: OK
+./scripts/reproduce_fresh.sh: OK
+Collecting numpy==1.26.4 (from -r requirements.txt (line 1))
+  Downloading numpy-1.26.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 2.2 MB/s eta 0:00:00
+Downloading numpy-1.26.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.0/18.0 MB 54.6 MB/s eta 0:00:00
+Installing collected packages: numpy
+Successfully installed numpy-1.26.4
+{
+  "held_out": [
+    {
+      "case": [
+        32,
+        "contrast",
+        "low"
+      ],
+      "CG": {
+        "iterations": 69,
+        "relative_error": 5.890502329254909e-08,
+        "relative_residual": 9.382555299718998e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 6.511305199134724e-10,
+        "relative_residual": 2.995664840407961e-10
+      }
+    },
+    {
+      "case": [
+        64,
+        "smooth",
+        "mixed"
+      ],
+      "CG": {
+        "iterations": 13,
+        "relative_error": 7.319822560143595e-09,
+        "relative_residual": 6.019576997191437e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 4.639901142270301e-12,
+        "relative_residual": 4.495270624124258e-12
+      }
+    },
+    {
+      "case": [
+        128,
+        "constant",
+        "polyexp"
+      ],
+      "CG": {
+        "iterations": 1,
+        "relative_error": 8.722093220322137e-09,
+        "relative_residual": 8.722104100714468e-09
+      },
+      "PCG": {
+        "iterations": 1,
+        "relative_error": 8.722093221098626e-09,
+        "relative_residual": 8.72210409837887e-09
+      }
+    },
+    {
+      "case": [
+        128,
+        "anisotropic",
+        "polyexp"
+      ],
+      "CG": {
+        "iterations": 11,
+        "relative_error": 1.8605638872222423e-09,
+        "relative_residual": 1.7406619288090528e-09
+      },
+      "PCG": {
+        "iterations": 1,
+        "relative_error": 1.1491600412051606e-08,
+        "relative_residual": 9.98497036002112e-09
+      }
+    },
+    {
+      "case": [
+        64,
+        "contrast",
+        "mixed"
+      ],
+      "CG": {
+        "iterations": 75,
+        "relative_error": 6.160517692535895e-08,
+        "relative_residual": 9.30966505746436e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 2.6474824144864606e-11,
+        "relative_residual": 8.93768699475709e-12
+      }
+    }
+  ],
+  "bad_weighted_jacobi_design_failures": 8
+}
+{
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy_version": "1.26.4",
+  "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+  "architecture": "x86_64",
+  "case": [
+    64,
+    "smooth",
+    "mixed"
+  ],
+  "warmups_per_solver": 1,
+  "repeats_per_solver": 5,
+  "clock": "time.perf_counter_ns"
+}
+{
+  "B2_warren": {
+    "H_asymmetric_combo": {
+      "stress_ratio": 1.2769660767268272,
+      "displacement_ratio": 0.006598097355174847,
+      "equilibrium_residual": 5.684341886080802e-14,
+      "mass": 6.0691087142598334
+    },
+    "H_edge_down": {
+      "stress_ratio": 0.78125,
+      "displacement_ratio": 0.0014681681028155466,
+      "equilibrium_residual": 3.552713678800501e-15,
+      "mass": 6.0691087142598334
+    },
+    "H_reversed_asymmetry": {
+      "stress_ratio": 1.7276599861598265,
+      "displacement_ratio": 0.006351533512512737,
+      "equilibrium_residual": 3.730349362740526e-14,
+      "mass": 6.0691087142598334
+    }
+  },
+  "G06": {
+    "H_asymmetric_combo": {
+      "stress_ratio": 1.2769660767268287,
+      "displacement_ratio": 0.006980781091599101,
+      "equilibrium_residual": 1.3137561058705954e-14,
+      "mass": 4.535164227014474
+    },
+    "H_edge_down": {
+      "stress_ratio": 12.5,
+      "displacement_ratio": 0.022499999999999996,
+      "equilibrium_residual": 0.0,
+      "mass": 4.535164227014474
+    },
+    "H_reversed_asymmetry": {
+      "stress_ratio": 1.7276599861598274,
+      "displacement_ratio": 0.0067157629305361795,
+      "equilibrium_residual": 2.398081733190338e-14,
+      "mass": 4.535164227014474
+    }
+  }
+}
+media/gen-design-topologies.svg
+media/num-synth-summary.svg
+media/gen-design-stress-utilization.svg
+media/gen-design-mass-and-held-out.svg
+Fresh disposable reproduction passed: /tmp/tmp.8BViFE65f4/package

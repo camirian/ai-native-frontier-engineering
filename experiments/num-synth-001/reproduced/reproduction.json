@@ -1,0 +1,90 @@
+{
+  "held_out": [
+    {
+      "case": [
+        32,
+        "contrast",
+        "low"
+      ],
+      "CG": {
+        "iterations": 69,
+        "relative_error": 5.897824348203222e-08,
+        "relative_residual": 9.474486522544542e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 6.511305213038828e-10,
+        "relative_residual": 2.9956648404883896e-10
+      }
+    },
+    {
+      "case": [
+        64,
+        "smooth",
+        "mixed"
+      ],
+      "CG": {
+        "iterations": 13,
+        "relative_error": 7.319822559334167e-09,
+        "relative_residual": 6.019576997191416e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 4.639901142269931e-12,
+        "relative_residual": 4.495270624128558e-12
+      }
+    },
+    {
+      "case": [
+        128,
+        "constant",
+        "polyexp"
+      ],
+      "CG": {
+        "iterations": 1,
+        "relative_error": 8.722093220045644e-09,
+        "relative_residual": 8.722104100713473e-09
+      },
+      "PCG": {
+        "iterations": 1,
+        "relative_error": 8.72209322092926e-09,
+        "relative_residual": 8.722104099047828e-09
+      }
+    },
+    {
+      "case": [
+        128,
+        "anisotropic",
+        "polyexp"
+      ],
+      "CG": {
+        "iterations": 11,
+        "relative_error": 1.8605638868373175e-09,
+        "relative_residual": 1.7406619288091078e-09
+      },
+      "PCG": {
+        "iterations": 1,
+        "relative_error": 1.1491600286523669e-08,
+        "relative_residual": 9.984970457337062e-09
+      }
+    },
+    {
+      "case": [
+        64,
+        "contrast",
+        "mixed"
+      ],
+      "CG": {
+        "iterations": 75,
+        "relative_error": 6.160517691764437e-08,
+        "relative_residual": 9.309665057464337e-09
+      },
+      "PCG": {
+        "iterations": 2,
+        "relative_error": 2.6474823873218845e-11,
+        "relative_residual": 8.937686995389002e-12
+      }
+    }
+  ],
+  "bad_weighted_jacobi_design_failures": 8
+}
