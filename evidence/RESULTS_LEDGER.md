@@ -19,3 +19,9 @@
 - Every baseline and finalist violated at least one held-out stress constraint. `G06` reached stress utilization `12.5` under `H_edge_down`.
 - Equilibrium residuals remained near numerical precision. The conclusion is envelope brittleness, not solver failure.
 - Boundary: no robust mass superiority was established.
+
+## SYS-PROTOCOL-001
+
+- Three materially distinct executable architectures conformed against an independently authored oracle on 25 frozen held-out traces.
+- Twelve deliberate semantic mutants were detected (12/12), and all 36 frozen requirements have traceability coverage.
+- The result is `EXECUTABLE_SE_SYNTHESIS_SUPPORTED` with Gate 1 `PASS`, bounded to the self-authored protocol and recorded interpretations.

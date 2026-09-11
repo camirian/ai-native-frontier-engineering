@@ -4,7 +4,7 @@ This repository distinguishes records created during the original clean-room mis
 
 ## Held-out provenance
 
-`HELD_OUT_PROVENANCE = PROCESS_RECORDED_NOT_CRYPTOGRAPHICALLY_PROVEN` for both experiments.
+`HELD_OUT_PROVENANCE = MIXED`: NUM-SYNTH and GEN-DESIGN remain process-recorded and not cryptographically proven; SYS-PROTOCOL includes a reproducible held-out hash manifest, but this public package still cannot prove historical sequestration retrospectively.
 
 The original scripts and local file ordering record a procedure in which manifests/candidate hashes were written before held-out evaluations. Because held-out cases were plaintext in the same scripts and records lack an immutable commitment, this is a process record, not independent proof of sequestration.
 
@@ -15,6 +15,8 @@ The unmodified source records are packaged under each experiment’s `evidence/o
 ## Public reproduction evidence
 
 The public scripts deterministically reproduce the packaged solver-validity and synthetic truss calculations. They do not recreate historical agent routing, candidate generation, timing conditions, or held-out secrecy.
+
+SYS-PROTOCOL public reproduction runs the three packaged candidates against the independent oracle, validates 25 held-out trace hashes, checks 12 mutation kills, and verifies the 36-row traceability matrix. This is a public reproduction record distinct from the original execution record.
 
 ## Asset authorship
 
