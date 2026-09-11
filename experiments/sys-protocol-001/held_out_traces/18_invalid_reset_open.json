@@ -1,0 +1,1 @@
+{"name":"RESET from OPEN invalid then normal close","events":[{"type":"OPEN_REQ","session_id":31},{"type":"OPEN_ACK","session_id":31},{"type":"RESET"},{"type":"CLOSE_REQ","session_id":31},{"type":"CLOSE_ACK","session_id":31}]}

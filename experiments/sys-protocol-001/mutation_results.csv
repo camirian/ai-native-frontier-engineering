@@ -1,0 +1,13 @@
+MUTANT_ID,KILLED,FIRST_KILL,SURVIVOR_REASON
+M01,True,design/wrong_session_open_ack,
+M02,True,design/duplicate_inbound_data,
+M03,True,design/future_inbound_data,
+M04,True,design/premature_close,
+M05,True,design/open_retry_then_ack,
+M06,True,design/open_timeout_abort_third,
+M07,True,held_out/RESET from OPEN invalid then normal close,
+M08,True,design/new_session_after_reset,
+M09,True,design/duplicate_close_ack,
+M10,True,held_out/future ACK invalid duplicate last ACK idempotent,
+M11,True,design/old_duplicate_data,
+M12,True,mutation_probe/M12_data_before_open,

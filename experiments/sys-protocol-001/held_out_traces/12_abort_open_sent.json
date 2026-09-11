@@ -1,0 +1,1 @@
+{"name":"abort while opening then reset","events":[{"type":"OPEN_REQ","session_id":22},{"type":"ABORT","reason":"operator"},{"type":"DATA","direction":"LOCAL","session_id":22,"seq":0,"payload_id":"x"},{"type":"RESET"}]}

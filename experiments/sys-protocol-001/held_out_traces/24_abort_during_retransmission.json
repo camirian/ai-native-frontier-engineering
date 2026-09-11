@@ -1,0 +1,1 @@
+{"name":"abort after retry is immediate","events":[{"type":"OPEN_REQ","session_id":37},{"type":"OPEN_ACK","session_id":37},{"type":"DATA","direction":"LOCAL","session_id":37,"seq":0,"payload_id":"a"},{"type":"TIMEOUT","timer_name":"data_timer"},{"type":"ABORT","reason":"link_loss"},{"type":"TIMEOUT","timer_name":"data_timer"},{"type":"RESET"}]}

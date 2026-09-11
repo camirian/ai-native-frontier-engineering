@@ -1,0 +1,5 @@
+[
+ {"name":"M12_data_before_open","events":[{"type":"OPEN_REQ","session_id":91},{"type":"DATA","session_id":91,"direction":"PEER","seq":0,"payload_id":"x"}]},
+ {"name":"M05_retry_reset","events":[{"type":"OPEN_REQ","session_id":92},{"type":"TIMEOUT","timer_name":"open_timer"},{"type":"OPEN_ACK","session_id":92}]},
+ {"name":"M08_reset_sequence","events":[{"type":"OPEN_REQ","session_id":93},{"type":"OPEN_ACK","session_id":93},{"type":"DATA","session_id":93,"direction":"LOCAL","seq":0,"payload_id":"x"},{"type":"DATA_ACK","session_id":93,"seq":0},{"type":"CLOSE_REQ","session_id":93},{"type":"CLOSE_ACK","session_id":93},{"type":"RESET"},{"type":"OPEN_REQ","session_id":94},{"type":"OPEN_ACK","session_id":94},{"type":"DATA","session_id":94,"direction":"LOCAL","seq":0,"payload_id":"x"}]}
+]

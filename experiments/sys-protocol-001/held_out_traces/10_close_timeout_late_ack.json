@@ -1,0 +1,1 @@
+{"name":"close timeout followed by ACK","events":[{"type":"OPEN_REQ","session_id":20},{"type":"OPEN_ACK","session_id":20},{"type":"CLOSE_REQ","session_id":20},{"type":"TIMEOUT","timer_name":"close_timer"},{"type":"CLOSE_ACK","session_id":20},{"type":"CLOSE_ACK","session_id":20},{"type":"RESET"}]}

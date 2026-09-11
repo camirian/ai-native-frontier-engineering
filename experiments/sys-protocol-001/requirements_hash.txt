@@ -1,0 +1,3 @@
+# Requirements freeze record — MISSION-SYS-PROTOCOL-001
+# Algorithm: SHA-256; object: exact bytes of requirements.yaml.
+ce7c7df883b3ccc0a094af10c988833bf9fa5947e8dfd92832cde3fcc8cdf043  requirements.yaml

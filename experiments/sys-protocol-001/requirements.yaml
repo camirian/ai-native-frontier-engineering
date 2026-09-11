@@ -1,0 +1,327 @@
+# Frozen normalization for MISSION-SYS-PROTOCOL-001. `original_text` is authoritative.
+# Status terms classify specification quality; they do not alter the frozen text.
+requirements:
+  - id: R01
+    original_text: "Initial system state is IDLE."
+    normalized_shall: "The protocol SHALL initialize with state IDLE."
+    state_event_references: {states: [IDLE], events: []}
+    preconditions: ["Protocol instance is created or initialized."]
+    postconditions: ["state = IDLE"]
+    affected_state_variables: [state]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R02
+    original_text: "A new session may begin only from IDLE."
+    normalized_shall: "The protocol SHALL begin a new session only when state is IDLE."
+    state_event_references: {states: [IDLE], events: [OPEN_REQ]}
+    preconditions: ["Event begins a new session.", "state = IDLE"]
+    postconditions: ["No new session begins from another state."]
+    affected_state_variables: [state, session_id]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R03
+    original_text: "`OPEN_REQ(id)` from IDLE records the session identifier and transitions to OPEN_SENT."
+    normalized_shall: "On OPEN_REQ(id) in IDLE, the protocol SHALL record id and set state to OPEN_SENT."
+    state_event_references: {states: [IDLE, OPEN_SENT], events: [OPEN_REQ]}
+    preconditions: ["state = IDLE", "id is a positive integer"]
+    postconditions: ["session_id = id", "state = OPEN_SENT"]
+    affected_state_variables: [state, session_id]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R04
+    original_text: "OPEN_SENT starts `open_timer` with retry counter zero."
+    normalized_shall: "On entry to OPEN_SENT, the protocol SHALL start open_timer and set open_retry_count to 0."
+    state_event_references: {states: [OPEN_SENT], events: [OPEN_REQ]}
+    preconditions: ["Transition into OPEN_SENT."]
+    postconditions: ["open_timer is active", "open_retry_count = 0"]
+    affected_state_variables: [open_timer, open_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R05
+    original_text: "Matching `OPEN_ACK(id)` in OPEN_SENT transitions to OPEN."
+    normalized_shall: "On OPEN_ACK(id) in OPEN_SENT with id equal to session_id, the protocol SHALL set state to OPEN."
+    state_event_references: {states: [OPEN_SENT, OPEN], events: [OPEN_ACK]}
+    preconditions: ["state = OPEN_SENT", "id = session_id"]
+    postconditions: ["state = OPEN"]
+    affected_state_variables: [state, open_timer, open_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R06
+    original_text: "Nonmatching `OPEN_ACK` must not open the session."
+    normalized_shall: "A nonmatching OPEN_ACK SHALL NOT transition the protocol to OPEN."
+    state_event_references: {states: [OPEN_SENT, OPEN], events: [OPEN_ACK]}
+    preconditions: ["OPEN_ACK id does not equal session_id"]
+    postconditions: ["state != OPEN as a consequence of this event"]
+    affected_state_variables: [state]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R07
+    original_text: "In OPEN, transmit DATA sequence numbering begins at 0."
+    normalized_shall: "When transmission begins in OPEN, the first new local DATA sequence number SHALL be 0."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["state = OPEN", "No prior new local DATA has been accepted in this session."]
+    postconditions: ["tx sequence of first accepted DATA = 0"]
+    affected_state_variables: [tx_next_seq, tx_outstanding]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R08
+    original_text: "New transmitted DATA sequence numbers increase monotonically by exactly one."
+    normalized_shall: "Each accepted new local DATA SHALL use a sequence number exactly one greater than the preceding accepted new local DATA."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["A new local DATA is accepted."]
+    postconditions: ["tx_next_seq increments by 1"]
+    affected_state_variables: [tx_next_seq, tx_outstanding]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R09
+    original_text: "At most one locally transmitted DATA item may await acknowledgment at a time."
+    normalized_shall: "The protocol SHALL accept no new local DATA while tx_outstanding is present."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["state = OPEN"]
+    postconditions: ["At most one tx_outstanding item exists"]
+    affected_state_variables: [tx_outstanding]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R10
+    original_text: "Matching DATA_ACK clears the outstanding item."
+    normalized_shall: "On DATA_ACK(session_id, seq) matching tx_outstanding, the protocol SHALL clear tx_outstanding."
+    state_event_references: {states: [OPEN], events: [DATA_ACK]}
+    preconditions: ["state = OPEN", "ACK session and sequence match tx_outstanding"]
+    postconditions: ["tx_outstanding = null", "tx_last_acked = acknowledged seq"]
+    affected_state_variables: [tx_outstanding, tx_last_acked, data_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R11
+    original_text: "Duplicate DATA_ACK for the most recently acknowledged sequence is idempotent."
+    normalized_shall: "A DATA_ACK for tx_last_acked with no matching outstanding item SHALL be accepted idempotently."
+    state_event_references: {states: [OPEN], events: [DATA_ACK]}
+    preconditions: ["ACK sequence = tx_last_acked", "No matching tx_outstanding"]
+    postconditions: ["Protocol state is unchanged"]
+    affected_state_variables: [state, tx_outstanding, tx_last_acked]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R12
+    original_text: "A DATA_ACK for a future sequence is invalid."
+    normalized_shall: "A DATA_ACK whose sequence exceeds the next locally valid acknowledgment sequence SHALL return invalid and not mutate state."
+    state_event_references: {states: [OPEN], events: [DATA_ACK]}
+    preconditions: ["ACK sequence is future relative to local transmit progress"]
+    postconditions: ["Explicit invalid result", "No protocol-state mutation"]
+    affected_state_variables: [tx_next_seq, tx_outstanding, tx_last_acked]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R13
+    original_text: "Received DATA is deliverable only in OPEN."
+    normalized_shall: "The protocol SHALL deliver received DATA only when state is OPEN."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["Inbound DATA is considered for delivery."]
+    postconditions: ["Delivery occurs only if state = OPEN"]
+    affected_state_variables: [state, rx_expected_seq, rx_last_delivered]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R14
+    original_text: "The next expected received DATA sequence is delivered exactly once."
+    normalized_shall: "In OPEN, inbound DATA at rx_expected_seq SHALL be delivered once and advance rx_expected_seq by 1."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["state = OPEN", "Inbound session matches session_id", "seq = rx_expected_seq"]
+    postconditions: ["One delivery", "rx_last_delivered = seq", "rx_expected_seq increments by 1"]
+    affected_state_variables: [rx_expected_seq, rx_last_delivered]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R15
+    original_text: "An exact duplicate of the most recently delivered DATA sequence must be acknowledged but not delivered twice."
+    normalized_shall: "In OPEN, inbound DATA at rx_last_delivered SHALL be acknowledged and SHALL NOT be delivered again."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["state = OPEN", "Inbound session matches", "seq = rx_last_delivered"]
+    postconditions: ["Acknowledgment emitted", "No delivery", "rx_expected_seq unchanged"]
+    affected_state_variables: [rx_expected_seq, rx_last_delivered]
+    ambiguity_status: A2
+    conflict_status: NONE
+  - id: R16
+    original_text: "Future/out-of-order received DATA is rejected without advancing the receive sequence."
+    normalized_shall: "In OPEN, inbound DATA with seq greater than rx_expected_seq SHALL be rejected and SHALL NOT advance rx_expected_seq."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["state = OPEN", "Inbound session matches", "seq > rx_expected_seq"]
+    postconditions: ["Explicit invalid result", "rx_expected_seq unchanged"]
+    affected_state_variables: [rx_expected_seq, rx_last_delivered]
+    ambiguity_status: A2
+    conflict_status: NONE
+  - id: R17
+    original_text: "DATA from a nonmatching session identifier is invalid."
+    normalized_shall: "Inbound DATA whose session identifier differs from session_id SHALL return invalid and not mutate protocol state."
+    state_event_references: {states: [OPEN], events: [DATA]}
+    preconditions: ["Inbound DATA session_id != recorded session_id"]
+    postconditions: ["Explicit invalid result", "No protocol-state mutation"]
+    affected_state_variables: [session_id, rx_expected_seq, rx_last_delivered]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R18
+    original_text: "CLOSE_REQ may begin only in OPEN."
+    normalized_shall: "The protocol SHALL initiate local close only on CLOSE_REQ in OPEN."
+    state_event_references: {states: [OPEN, CLOSE_SENT], events: [CLOSE_REQ]}
+    preconditions: ["state = OPEN"]
+    postconditions: ["No close initiation outside OPEN"]
+    affected_state_variables: [state]
+    ambiguity_status: C2
+    conflict_status: C2_NO_ISSUE
+  - id: R19
+    original_text: "Local CLOSE_REQ is permitted only when no transmitted DATA acknowledgment is outstanding."
+    normalized_shall: "The protocol SHALL accept local CLOSE_REQ only when tx_outstanding is absent."
+    state_event_references: {states: [OPEN], events: [CLOSE_REQ]}
+    preconditions: ["state = OPEN", "tx_outstanding = null"]
+    postconditions: ["No close initiation while local DATA acknowledgment is outstanding"]
+    affected_state_variables: [tx_outstanding, state]
+    ambiguity_status: C2
+    conflict_status: C2_NO_ISSUE
+  - id: R20
+    original_text: "Valid CLOSE_REQ transitions to CLOSE_SENT and starts `close_timer`."
+    normalized_shall: "A valid CLOSE_REQ SHALL set state to CLOSE_SENT and start close_timer."
+    state_event_references: {states: [OPEN, CLOSE_SENT], events: [CLOSE_REQ]}
+    preconditions: ["CLOSE_REQ satisfies R18 and R19"]
+    postconditions: ["state = CLOSE_SENT", "close_timer is active", "close_retry_count = 0"]
+    affected_state_variables: [state, close_timer, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R21
+    original_text: "Matching CLOSE_ACK in CLOSE_SENT transitions to CLOSED."
+    normalized_shall: "On CLOSE_ACK matching session_id in CLOSE_SENT, the protocol SHALL set state to CLOSED."
+    state_event_references: {states: [CLOSE_SENT, CLOSED], events: [CLOSE_ACK]}
+    preconditions: ["state = CLOSE_SENT", "ACK session matches"]
+    postconditions: ["state = CLOSED"]
+    affected_state_variables: [state, close_timer, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R22
+    original_text: "ABORT from OPEN_SENT, OPEN, or CLOSE_SENT transitions immediately to ABORTED."
+    normalized_shall: "On ABORT in OPEN_SENT, OPEN, or CLOSE_SENT, the protocol SHALL immediately set state to ABORTED."
+    state_event_references: {states: [OPEN_SENT, OPEN, CLOSE_SENT, ABORTED], events: [ABORT]}
+    preconditions: ["state is OPEN_SENT, OPEN, or CLOSE_SENT"]
+    postconditions: ["state = ABORTED"]
+    affected_state_variables: [state, open_timer, data_timer, close_timer]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R23
+    original_text: "ABORTED is terminal except for RESET."
+    normalized_shall: "In ABORTED, the protocol SHALL reject all events except RESET."
+    state_event_references: {states: [ABORTED, IDLE], events: [RESET]}
+    preconditions: ["state = ABORTED"]
+    postconditions: ["Non-RESET events do not leave ABORTED"]
+    affected_state_variables: [state]
+    ambiguity_status: NONE
+    conflict_status: C1_NO_ISSUE
+  - id: R24
+    original_text: "RESET from ABORTED transitions to IDLE and clears all session state."
+    normalized_shall: "On RESET in ABORTED, the protocol SHALL set state to IDLE and clear all session state."
+    state_event_references: {states: [ABORTED, IDLE], events: [RESET]}
+    preconditions: ["state = ABORTED"]
+    postconditions: ["state = IDLE", "All session state cleared"]
+    affected_state_variables: [state, session_id, tx_next_seq, tx_outstanding, tx_last_acked, rx_expected_seq, rx_last_delivered, open_timer, data_timer, close_timer, open_retry_count, data_retry_count, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: C1_NO_ISSUE
+  - id: R25
+    original_text: "RESET from CLOSED transitions to IDLE."
+    normalized_shall: "On RESET in CLOSED, the protocol SHALL set state to IDLE."
+    state_event_references: {states: [CLOSED, IDLE], events: [RESET]}
+    preconditions: ["state = CLOSED"]
+    postconditions: ["state = IDLE"]
+    affected_state_variables: [state]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R26
+    original_text: "RESET from any other state is invalid."
+    normalized_shall: "On RESET in a state other than ABORTED or CLOSED, the protocol SHALL return invalid and not mutate state."
+    state_event_references: {states: [IDLE, OPEN_SENT, OPEN, CLOSE_SENT], events: [RESET]}
+    preconditions: ["state is not ABORTED or CLOSED"]
+    postconditions: ["Explicit invalid result", "No protocol-state mutation"]
+    affected_state_variables: [state]
+    ambiguity_status: NONE
+    conflict_status: C1_NO_ISSUE
+  - id: R27
+    original_text: "OPEN timeout causes retransmission of OPEN_REQ."
+    normalized_shall: "On an open_timer timeout before the abort threshold, the protocol SHALL retransmit OPEN_REQ."
+    state_event_references: {states: [OPEN_SENT], events: [TIMEOUT]}
+    preconditions: ["state = OPEN_SENT", "timer_name = open_timer", "Threshold not reached"]
+    postconditions: ["OPEN_REQ retransmitted", "open_retry_count increments"]
+    affected_state_variables: [open_timer, open_retry_count]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R28
+    original_text: "After three consecutive OPEN timeouts without matching OPEN_ACK, transition to ABORTED."
+    normalized_shall: "On the third consecutive open_timer timeout without a matching OPEN_ACK, the protocol SHALL set state to ABORTED."
+    state_event_references: {states: [OPEN_SENT, ABORTED], events: [TIMEOUT, OPEN_ACK]}
+    preconditions: ["state = OPEN_SENT", "timer_name = open_timer", "open_retry_count becomes 3"]
+    postconditions: ["state = ABORTED"]
+    affected_state_variables: [state, open_retry_count, open_timer]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R29
+    original_text: "A DATA timeout retransmits the outstanding DATA item."
+    normalized_shall: "On a data_timer timeout for tx_outstanding before the abort threshold, the protocol SHALL retransmit tx_outstanding."
+    state_event_references: {states: [OPEN], events: [TIMEOUT]}
+    preconditions: ["state = OPEN", "timer_name = data_timer", "tx_outstanding exists", "Threshold not reached"]
+    postconditions: ["Outstanding DATA retransmitted", "data_retry_count increments"]
+    affected_state_variables: [data_timer, data_retry_count, tx_outstanding]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R30
+    original_text: "After three consecutive DATA timeouts without matching DATA_ACK, transition to ABORTED."
+    normalized_shall: "On the third consecutive data_timer timeout without a matching DATA_ACK, the protocol SHALL set state to ABORTED."
+    state_event_references: {states: [OPEN, ABORTED], events: [TIMEOUT, DATA_ACK]}
+    preconditions: ["state = OPEN", "timer_name = data_timer", "tx_outstanding exists", "data_retry_count becomes 3"]
+    postconditions: ["state = ABORTED"]
+    affected_state_variables: [state, data_retry_count, data_timer, tx_outstanding]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R31
+    original_text: "CLOSE timeout causes retransmission of CLOSE_REQ."
+    normalized_shall: "On a close_timer timeout before the abort threshold, the protocol SHALL retransmit CLOSE_REQ."
+    state_event_references: {states: [CLOSE_SENT], events: [TIMEOUT]}
+    preconditions: ["state = CLOSE_SENT", "timer_name = close_timer", "Threshold not reached"]
+    postconditions: ["CLOSE_REQ retransmitted", "close_retry_count increments"]
+    affected_state_variables: [close_timer, close_retry_count]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R32
+    original_text: "After three consecutive CLOSE timeouts without matching CLOSE_ACK, transition to ABORTED."
+    normalized_shall: "On the third consecutive close_timer timeout without a matching CLOSE_ACK, the protocol SHALL set state to ABORTED."
+    state_event_references: {states: [CLOSE_SENT, ABORTED], events: [TIMEOUT, CLOSE_ACK]}
+    preconditions: ["state = CLOSE_SENT", "timer_name = close_timer", "close_retry_count becomes 3"]
+    postconditions: ["state = ABORTED"]
+    affected_state_variables: [state, close_retry_count, close_timer]
+    ambiguity_status: A1
+    conflict_status: NONE
+  - id: R33
+    original_text: "Successful matching acknowledgment resets the corresponding retry counter."
+    normalized_shall: "A successful matching OPEN_ACK, DATA_ACK, or CLOSE_ACK SHALL reset its corresponding retry counter to 0."
+    state_event_references: {states: [OPEN_SENT, OPEN, CLOSE_SENT], events: [OPEN_ACK, DATA_ACK, CLOSE_ACK]}
+    preconditions: ["Acknowledgment matches the active exchange."]
+    postconditions: ["Corresponding retry counter = 0"]
+    affected_state_variables: [open_retry_count, data_retry_count, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R34
+    original_text: "Events not valid in the current state return an explicit invalid result and must not silently mutate protocol state."
+    normalized_shall: "For an event invalid in the current state, the protocol SHALL return an explicit invalid result and SHALL NOT mutate protocol state."
+    state_event_references: {states: [IDLE, OPEN_SENT, OPEN, CLOSE_SENT, CLOSED, ABORTED], events: [OPEN_REQ, OPEN_ACK, DATA, DATA_ACK, CLOSE_REQ, CLOSE_ACK, TIMEOUT, ABORT, RESET]}
+    preconditions: ["Event is not valid in current state."]
+    postconditions: ["Explicit invalid result", "No protocol-state mutation"]
+    affected_state_variables: [state, session_id, tx_next_seq, tx_outstanding, tx_last_acked, rx_expected_seq, rx_last_delivered, open_timer, data_timer, close_timer, open_retry_count, data_retry_count, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: C1_NO_ISSUE
+  - id: R35
+    original_text: "CLOSED ignores duplicate CLOSE_ACK for the just-completed session without reopening or aborting."
+    normalized_shall: "In CLOSED, a duplicate CLOSE_ACK for session_id SHALL be ignored without reopening or aborting."
+    state_event_references: {states: [CLOSED], events: [CLOSE_ACK]}
+    preconditions: ["state = CLOSED", "CLOSE_ACK session matches just-completed session"]
+    postconditions: ["state remains CLOSED"]
+    affected_state_variables: [state, session_id]
+    ambiguity_status: NONE
+    conflict_status: NONE
+  - id: R36
+    original_text: "Session state from a previous session must not leak into a new session after RESET."
+    normalized_shall: "After a valid RESET and a subsequent new session, the protocol SHALL not retain prior-session state that affects the new session."
+    state_event_references: {states: [ABORTED, CLOSED, IDLE, OPEN_SENT], events: [RESET, OPEN_REQ]}
+    preconditions: ["A valid RESET has occurred before a subsequent OPEN_REQ."]
+    postconditions: ["New session uses initialized session variables and no prior-session behavior"]
+    affected_state_variables: [session_id, tx_next_seq, tx_outstanding, tx_last_acked, rx_expected_seq, rx_last_delivered, open_timer, data_timer, close_timer, open_retry_count, data_retry_count, close_retry_count]
+    ambiguity_status: NONE
+    conflict_status: NONE

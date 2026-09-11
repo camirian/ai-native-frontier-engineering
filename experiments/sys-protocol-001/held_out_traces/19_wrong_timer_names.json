@@ -1,0 +1,1 @@
+{"name":"inactive timer names do not mutate","events":[{"type":"OPEN_REQ","session_id":32},{"type":"TIMEOUT","timer_name":"data_timer"},{"type":"OPEN_ACK","session_id":32},{"type":"TIMEOUT","timer_name":"close_timer"},{"type":"CLOSE_REQ","session_id":32},{"type":"TIMEOUT","timer_name":"data_timer"},{"type":"CLOSE_ACK","session_id":32}]}

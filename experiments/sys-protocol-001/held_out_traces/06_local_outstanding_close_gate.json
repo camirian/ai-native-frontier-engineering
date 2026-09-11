@@ -1,0 +1,1 @@
+{"name":"close blocked until local data ACK","events":[{"type":"OPEN_REQ","session_id":16},{"type":"OPEN_ACK","session_id":16},{"type":"DATA","direction":"LOCAL","session_id":16,"seq":0,"payload_id":"x"},{"type":"CLOSE_REQ","session_id":16},{"type":"DATA_ACK","session_id":16,"seq":0},{"type":"CLOSE_REQ","session_id":16},{"type":"CLOSE_ACK","session_id":16}]}

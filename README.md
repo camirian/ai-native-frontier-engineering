@@ -2,7 +2,7 @@
 
 Reproducible clean-room experiments that test what an AI-amplified engineer can generate, falsify, and verify across engineering domains.
 
-The central observation is deliberately narrow: when candidate generation and implementation become cheap, specification quality, independent oracles, held-out evaluation, and claim boundaries become dominant engineering work. This is **partially validated across two clean-room domains**, not established as a universal law.
+The central observation is deliberately narrow: when candidate generation and implementation become cheap, specification quality, independent oracles, held-out evaluation, and claim boundaries become dominant engineering work. Evidence now spans three bounded clean-room engineering domains. Two earlier experiments produced partial/inconclusive results; the executable systems-engineering experiment reached its predefined Gate PASS. This does not establish a universal law.
 
 ## Experiments
 
@@ -10,8 +10,9 @@ The central observation is deliberately narrow: when candidate generation and im
 | --- | --- | --- | --- |
 | [`num-synth-001`](experiments/num-synth-001/) | Historical exploratory run recorded a large PCG/CG timing difference | Public reproduction checks five recorded cases; an over-relaxed Jacobi control fails 8/8 design cases | No robust performance claim |
 | [`gen-design-001`](experiments/gen-design-001/) | G06 was 25.27% lighter than B2_warren on the recorded design envelope | Public reproduction checks a 12.5 stress ratio for G06 under an edge load | No robust superiority |
+| [`sys-protocol-001`](experiments/sys-protocol-001/) | Three executable implementations of a self-authored session protocol | Independent oracle; 12/12 mutation kills; 25 held-out traces; 36/36 traceability | Bounded Gate PASS; not production protocol correctness |
 
-Neither experiment describes a real bridge, building, deployed solver, or production recommendation. Both are synthetic, normalized, and bounded.
+None of these experiments describes a real bridge, building, deployed solver, production protocol, or production recommendation. All are synthetic, normalized, and bounded.
 
 ## Method
 

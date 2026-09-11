@@ -1,0 +1,7 @@
+# Owner learning return
+
+The genuine ambiguities were timeout-count timing (A1) and older-than-most-recent receive duplicates (A2). Both were recorded before candidate integration: timeout three aborts immediately; older duplicates are invalid. The two seeded tensions were not conflicts: RESET is the named ABORTED exception, and only a local outstanding transmission gates close.
+
+The independent event-dispatch candidate was easiest to inspect operationally because state ownership is explicit. The rule-driven and transition-table candidates offered different review surfaces; all three conformed on the frozen corpus. Mutation testing exposed a useful verification lesson: state-only comparison did not kill the double-delivery mutant. The conformance harness was strengthened to compare delivery observables as well as validity and normalized state, then all 12 deliberate mutants were killed.
+
+Held-out traces exposed no candidate failures after integration. The V1 change showed that a small cardinality change has non-small semantic impact: ACK order and timeout ownership require new decisions. AI compressed artifact production and cross-checking. Human judgment remained necessary to prevent silent specification invention. This differs from ordinary requirements-to-code generation because the requirement freeze, separate oracle, mutation test, and held-out comparison make disagreement observable.

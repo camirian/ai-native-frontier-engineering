@@ -1,0 +1,1 @@
+{"name":"inbound delivery does not create local close gate","events":[{"type":"OPEN_REQ","session_id":33},{"type":"OPEN_ACK","session_id":33},{"type":"DATA","direction":"PEER","session_id":33,"seq":0,"payload_id":"inbound"},{"type":"CLOSE_REQ","session_id":33},{"type":"CLOSE_ACK","session_id":33}]}

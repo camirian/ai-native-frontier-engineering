@@ -1,0 +1,1 @@
+{"name":"only matching closed ACK is ignored","events":[{"type":"OPEN_REQ","session_id":36},{"type":"OPEN_ACK","session_id":36},{"type":"CLOSE_REQ","session_id":36},{"type":"CLOSE_ACK","session_id":36},{"type":"CLOSE_ACK","session_id":37},{"type":"CLOSE_ACK","session_id":36},{"type":"RESET"}]}

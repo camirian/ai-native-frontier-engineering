@@ -1,0 +1,52 @@
+artifact: behavioral_defects
+mutants:
+  - id: M01
+    class: M01AcceptWrongSessionOpenAck
+    defect: Accept a nonmatching OPEN_ACK as matching.
+    target_requirements: [R05, R06]
+  - id: M02
+    class: M02DoubleDeliverDuplicateData
+    defect: Deliver the immediately preceding DATA sequence a second time.
+    target_requirements: [R14, R15]
+  - id: M03
+    class: M03AcceptFutureData
+    defect: Accept future/out-of-order DATA and advance receive state.
+    target_requirements: [R16]
+  - id: M04
+    class: M04AllowCloseWithOutstanding
+    defect: Start CLOSE while locally transmitted DATA remains unacknowledged.
+    target_requirements: [R19]
+  - id: M05
+    class: M05DoNotResetRetryOnAck
+    defect: Preserve open retry count after a successful OPEN_ACK.
+    target_requirements: [R33]
+  - id: M06
+    class: M06AbortOnFourthTimeout
+    defect: Abort only after a fourth timeout.
+    target_requirements: [R28, R30, R32]
+    interpretation: A1
+  - id: M07
+    class: M07ResetFromOpen
+    defect: Accept RESET from OPEN.
+    target_requirements: [R26]
+  - id: M08
+    class: M08LeakSequenceAcrossReset
+    defect: Preserve sequence counters when starting a post-reset session.
+    target_requirements: [R24, R25, R36]
+  - id: M09
+    class: M09ReopenOnDuplicateCloseAck
+    defect: Reopen CLOSED on a duplicate matching CLOSE_ACK.
+    target_requirements: [R35]
+  - id: M10
+    class: M10AcceptFutureDataAck
+    defect: Treat a future DATA_ACK as the outstanding acknowledgement.
+    target_requirements: [R12]
+  - id: M11
+    class: M11AcknowledgeOlderDuplicate
+    defect: Acknowledge older-than-most-recent duplicate DATA.
+    target_requirements: [R15, R16]
+    interpretation: A2
+  - id: M12
+    class: M12AllowDataOutsideOpen
+    defect: Deliver matching DATA while OPEN_SENT.
+    target_requirements: [R13]

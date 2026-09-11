@@ -1,0 +1,1 @@
+{"name":"abort while open is terminal","events":[{"type":"OPEN_REQ","session_id":23},{"type":"OPEN_ACK","session_id":23},{"type":"ABORT","reason":"operator"},{"type":"CLOSE_REQ","session_id":23},{"type":"RESET"}]}

@@ -1,0 +1,1 @@
+{"name":"new open cannot replace active session","events":[{"type":"OPEN_REQ","session_id":38},{"type":"OPEN_REQ","session_id":39},{"type":"OPEN_ACK","session_id":38},{"type":"CLOSE_REQ","session_id":38},{"type":"CLOSE_ACK","session_id":38},{"type":"RESET"},{"type":"OPEN_REQ","session_id":39},{"type":"OPEN_ACK","session_id":39}]}
