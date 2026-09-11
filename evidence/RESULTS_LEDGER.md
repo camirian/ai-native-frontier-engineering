@@ -14,6 +14,12 @@
 
 - Synthetic normalized planar truss with a finite-element axial-bar oracle.
 - Twelve generated topology families and two conventional baselines were design-evaluated.
+
+## SYS-PROTOCOL-001
+
+- Three materially distinct executable architectures conformed against an independently authored oracle on 25 frozen held-out traces.
+- Twelve deliberate semantic mutants were detected (12/12), and all 36 frozen requirements have traceability coverage.
+- The result is `EXECUTABLE_SE_SYNTHESIS_SUPPORTED` with Gate 1 `PASS`, bounded to the self-authored protocol and recorded interpretations.
 - `B2_warren` design mass: `6.069109`; `G06` design mass: `4.535164`; apparent design-envelope reduction: `25.27%`.
 - The original process record writes finalist hashes before held-out evaluation, but has no immutable precommitment and does not prove evaluator independence.
 - Every baseline and finalist violated at least one held-out stress constraint. `G06` reached stress utilization `12.5` under `H_edge_down`.

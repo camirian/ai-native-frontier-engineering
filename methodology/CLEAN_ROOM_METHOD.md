@@ -10,4 +10,4 @@ Each mission is a bounded synthetic experiment, not a product benchmark.
 
 **Bounded claims.** Report both the apparent result and the strongest falsifier. Do not generalize from this package to real structures, deployed numerical workloads, or the capabilities of AI systems broadly.
 
-The organization-of-one observation is `PARTIALLY_SUPPORTED`: the workflow was operated by an AI-amplified engineer in two bounded missions. It is not a productivity or economic claim.
+The organization-of-one observation is `PARTIALLY_SUPPORTED`: the workflow was operated by an AI-amplified engineer across three bounded missions, with two partial/inconclusive outcomes and one predefined Gate PASS. It is not a productivity or economic claim.
