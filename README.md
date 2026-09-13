@@ -2,7 +2,12 @@
 
 Reproducible clean-room experiments that test what an AI-amplified engineer can generate, falsify, and verify across engineering domains.
 
-The central observation is deliberately narrow: when candidate generation and implementation become cheap, specification quality, independent oracles, held-out evaluation, and claim boundaries become dominant engineering work. Evidence now spans three bounded clean-room engineering domains. Two earlier experiments produced partial/inconclusive results; the executable systems-engineering experiment reached its predefined Gate PASS. This does not establish a universal law.
+The central observation is deliberately narrow: AI makes generation cheaper, so specification quality, independent oracles, held-out evaluation, authority resolution, and claim boundaries become more important. Evidence now spans three bounded clean-room engineering domains plus two cross-cutting case studies. This does not establish a universal law.
+
+## Research spine
+
+- [`Engineering compression`](research/engineering-compression/): a bounded multidisciplinary execution experiment with independent evaluation and preserved negative evidence.
+- [`Authority precedence`](research/authority-precedence/): why correct execution can still produce the wrong outcome when local instructions are stale.
 
 ## Experiments
 
@@ -23,6 +28,8 @@ None of these experiments describes a real bridge, building, deployed solver, pr
 5. Preserve failures and state only claims supported by the evidence.
 
 Read [the methodology](methodology/CLEAN_ROOM_METHOD.md), [the claim table](PUBLIC_CLAIMS.md), and the per-experiment reproduction notes before reusing results.
+
+The common thread is simple: cheaper generation increases the value of specification, authority precedence, independent evaluation, and disciplined claims.
 
 ## Reproduce
 
