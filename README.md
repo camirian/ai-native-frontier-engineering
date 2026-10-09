@@ -1,15 +1,17 @@
 # AI-Native Frontier Engineering
 
+> **Portfolio status — 2026-10-09: REFERENCE_EVIDENCE_LIBRARY.** Preserve these clean-room experiments, methods, and negative results as reusable evidence. Do not launch new synthetic frontier experiments from this repository by default. New work requires a selected Live Mission Engineering production order whose real external system needs the method or evidence.
+
 Reproducible clean-room experiments that test what an AI-amplified engineer can generate, falsify, and verify across engineering domains.
 
 The central observation is deliberately narrow: AI makes generation cheaper, so specification quality, independent oracles, held-out evaluation, authority resolution, and claim boundaries become more important. Evidence now spans three bounded clean-room engineering domains plus two cross-cutting case studies. This does not establish a universal law.
 
-## Research spine
+## Preserved research spine
 
 - [`Engineering compression`](research/engineering-compression/): a bounded multidisciplinary execution experiment with independent evaluation and preserved negative evidence.
 - [`Authority precedence`](research/authority-precedence/): why correct execution can still produce the wrong outcome when local instructions are stale.
 
-## Experiments
+## Preserved experiments
 
 | Experiment | Apparent design-set result | Independent check | Disposition |
 | --- | --- | --- | --- |
@@ -45,5 +47,7 @@ python3 scripts/render_figures.py
 Read [`PROVENANCE.md`](PROVENANCE.md), [`PUBLIC_CLAIMS.md`](PUBLIC_CLAIMS.md), and [`FRESH_REPRODUCTION.md`](FRESH_REPRODUCTION.md) before reusing results.
 
 ## Status
+
+No active research campaign is authorized from this repository alone. Research is on-demand support for a live mission.
 
 This package distinguishes original execution records from later public reproduction. Original held-out process records are not cryptographic proof of secrecy or independence.
